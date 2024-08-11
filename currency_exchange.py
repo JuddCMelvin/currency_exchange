@@ -20,7 +20,7 @@ class Currency:
     #add magic methods here
     def __repr__(self):
     # This method returns the string to be printed. This should be the value rounded to two digits, accompanied by its acronym.
-        pass
+        return f"{round (self.value,2)}{self.unit}"
     
     def __str__(self):
         #This method returns the same value as __repr__(self).
