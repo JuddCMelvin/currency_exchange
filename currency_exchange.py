@@ -14,8 +14,8 @@ class Currency:
         """
         An Currency object is transformed from the unit "self.unit" to "new_unit"
         """
-    self.value = (self.value / Currency.currencies[self.unit] * Currency.currencies[new_unit])
-    self.unit = new_unit
+        self.value = (self.value / Currency.currencies[self.unit] * Currency.currencies[new_unit])
+        self.unit = new_unit
     
     #add magic methods here
     def __repr__(self):
@@ -34,18 +34,45 @@ class Currency:
         self. If other is an int or a float, other will
         be treated as a USD value. 
         """
-    if type(other) == int or type(other) == float:
-      x = (other * Currency.currencies[self.unit])
-    else:
-      x = (other.value / Currency.currencies[other.unit] * Currency.currencies[self.unit]) 
-    return Currency(x + self.value, self.unit)
-                    
+        if type(other) == int or type(other) == float:
+            x = (other * Currency.currencies[self.unit])
+        else:
+            x = (other.value / Currency.currencies[other.unit] * Currency.currencies[self.unit]) 
+        return Currency(x + self.value, self.unit)
+    
+    def __iadd__(self, other):
+        """
+        Similar to __add__
+        """
+        return Currency.__add__(self,other)
+
+    def __sub__(self, other):
+        """
+        Defines the '+' operator.
+        If other is a Currency object the currency values 
+        are subtracted and the result will be the unit of 
+        self. If other is an int or a float, other will
+        be treated as a USD value. 
+        """
+        if type(other) == int or type(other) == float:
+            x = (other * Currency.currencies[self.unit])
+        else:
+            x = (other.value / Currency.currencies[other.unit] * Currency.currencies[self.unit]) 
+        return Currency(self.value - x, self.unit)
+
+
+    def __isub__(self, other):
+        """
+        Similar to __sub__
+        """
+        return Currency.__sub__(self,other)
+                        
         
-sv1 = Currency(23.43, "EUR")
+v1 = Currency(23.43, "EUR")
 v2 = Currency(19.97, "USD")
 print(v1 + v2)
 print(v2 + v1)
 print(v1 + 3) # an int or a float is considered to be a USD value
-print(3 + v1)
+# print(3 + v1)
 print(v1 - 3) # an int or a float is considered to be a USD value
 print(30 - v2) 
