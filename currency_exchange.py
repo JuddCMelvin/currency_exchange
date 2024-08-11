@@ -11,9 +11,9 @@ class Currency:
         self.unit = unit
 
     def changeTo(self, new_unit):
-    """
+        """
         An Currency object is transformed from the unit "self.unit" to "new_unit"
-    """
+        """
     self.value = (self.value / Currency.currencies[self.unit] * Currency.currencies[new_unit])
     self.unit = new_unit
     
@@ -24,16 +24,16 @@ class Currency:
     
     def __str__(self):
         #This method returns the same value as __repr__(self).
-        pass
+        return f"{round (self.value,2)}{self.unit}"
     
     def __add__(self, other):
-    """
+        """
         Defines the '+' operator.
         If other is a Currency object the currency values 
         are added and the result will be the unit of 
         self. If other is an int or a float, other will
         be treated as a USD value. 
-    """
+        """
     if type(other) == int or type(other) == float:
       x = (other * Currency.currencies[self.unit])
     else:
